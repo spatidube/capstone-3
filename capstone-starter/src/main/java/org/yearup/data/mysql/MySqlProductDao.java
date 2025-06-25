@@ -22,7 +22,7 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
     public List<Product> search(Integer categoryId, BigDecimal minPrice, BigDecimal maxPrice, String color)
     {
         List<Product> products = new ArrayList<>();
-
+//maybe a bug as it has = instead of like
         String sql = "SELECT * FROM products " +
                 "WHERE (category_id = ? OR ? = -1) " +
                 "   AND (price <= ? OR ? = -1) " +
@@ -63,7 +63,7 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
     public List<Product> listByCategoryId(int categoryId)
     {
         List<Product> products = new ArrayList<>();
-
+//maybe a bug bc of = instead of LIKE
         String sql = "SELECT * FROM products " +
                     " WHERE category_id = ? ";
 
@@ -92,6 +92,7 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
     @Override
     public Product getById(int productId)
     {
+        //maybe a bug as it's using = instead of LIKE
         String sql = "SELECT * FROM products WHERE product_id = ?";
         try (Connection connection = getConnection())
         {
