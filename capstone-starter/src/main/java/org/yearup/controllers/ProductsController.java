@@ -26,7 +26,7 @@ public class ProductsController
 
     @GetMapping("")
     @PreAuthorize("permitAll()")
-    // where initially believe where a bug is, considering this is where the filtering occurs
+    // where initially believe where a bug is, considering this is where the search/filter occurs
     public List<Product> search(@RequestParam(name="cat", required = false) Integer categoryId,
                                 @RequestParam(name="minPrice", required = false) BigDecimal minPrice,
                                 @RequestParam(name="maxPrice", required = false) BigDecimal maxPrice,
