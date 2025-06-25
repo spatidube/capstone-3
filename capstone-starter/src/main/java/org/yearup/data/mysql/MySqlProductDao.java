@@ -21,17 +21,24 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
     @Override
     public List<Product> search(Integer categoryId, BigDecimal minPrice, BigDecimal maxPrice, String color)
     {
+        //Create an empty list to store the products found
         List<Product> products = new ArrayList<>();
 //maybe a bug as it has = instead of like
-        String sql = "SELECT * FROM products " +
-                "WHERE (category_id = ? OR ? = -1) " +
-                "   AND (price <= ? OR ? = -1) " +
-                "   AND (color = ? OR ? = '') ";
+        //beginning the sql query "WHERE 1=1" IS A TRICK TO MAKE ADDING A filter easier
+        StringBuilder sql = new StringBuilder("SELECT * FROM products where 1=1 ");
 
-        categoryId = categoryId == null ? -1 : categoryId;
-        minPrice = minPrice == null ? new BigDecimal("-1") : minPrice;
-        maxPrice = maxPrice == null ? new BigDecimal("-1") : maxPrice;
-        color = color == null ? "" : color;
+//filter by the given categoryId
+             //   "WHERE (category_id = ? OR ? = -1) " +
+               // "   AND (price <= ? OR ? = -1) " +
+                // "   AND (color = ? OR ? = '') ";
+if (categoryId != null ) {
+    sql.append("AND category_id = ? ");
+    params.add(categoryId); //adding categoryId to parameter List
+    //        categoryId = categoryId == null ? -1 : categoryId;
+}
+//filter products that cost more than or equal to it
+       // minPrice = minPrice == null ? new BigDecimal("-1") : minPrice;
+
 
         try (Connection connection = getConnection())
         {
