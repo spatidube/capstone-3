@@ -38,7 +38,19 @@ if (categoryId != null ) {
 }
 //filter products that cost more than or equal to it
        // minPrice = minPrice == null ? new BigDecimal("-1") : minPrice;
+        if (minPrice != null) {
+            sql.append("AND price >= ?");
+            paras.add(minPrice);
+        }
+        //maxPrice is provided, so filter prouctsthat cost less than or equal to it
+        // maxPrice = maxPrice == null ? new BigDecimal("-1") : maxPrice;
 
+        if (maxPrice != null) {
+            sql.append("AND price <= ?");
+            paras.add(maxPrice);
+        }
+        //colors searched for and searching fo
+        color = color == null ? "" : color;
 
         try (Connection connection = getConnection())
         {
