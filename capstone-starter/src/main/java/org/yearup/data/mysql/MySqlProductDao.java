@@ -36,8 +36,6 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
     //        categoryId = categoryId == null ? -1 : categoryId;
 }
 
-        //declare parameters
-        List<Object> params = new ArrayList<>();
 //filter products that cost more than or equal to it
        // minPrice = minPrice == null ? new BigDecimal("-1") : minPrice;
         if (minPrice != null) {
