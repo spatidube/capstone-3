@@ -37,7 +37,7 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
 //filter products that cost more than or equal to it
        // minPrice = minPrice == null ? new BigDecimal("-1") : minPrice;
         if (minPrice != null) {
-            sql.append("AND price >= ?");
+            sql.append(" AND price >= ?");
         }
         //maxPrice is provided, so filter prouctsthat cost less than or equal to it
         // maxPrice = maxPrice == null ? new BigDecimal("-1") : maxPrice;
@@ -70,7 +70,7 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
                 statement.setBigDecimal(paramIndex++, maxPrice);
             }
             if (color != null && !color.isEmpty()) {
-                statement.setString(paramIndex++, color);
+                statement.setString(paramIndex++, "%" + color + "%");
             }
 
 
