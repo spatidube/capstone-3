@@ -27,10 +27,8 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
         //beginning the sql query "WHERE 1=1" IS A TRICK TO MAKE ADDING A filter easier
         StringBuilder sql = new StringBuilder("SELECT * FROM products where 1=1 ");
 //declare the parameters
+
 //filter by the given categoryId
-             //   "WHERE (category_id = ? OR ? = -1) " +
-               // "   AND (price <= ? OR ? = -1) " +
-                // "   AND (color = ? OR ? = '') ";
         if (categoryId != null ) {
              sql.append("AND category_id = ? ");
     //        categoryId = categoryId == null ? -1 : categoryId;
@@ -45,11 +43,11 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
         // maxPrice = maxPrice == null ? new BigDecimal("-1") : maxPrice;
 
         if (maxPrice != null) {
-            sql.append("AND price <= ?");
+            sql.append(" AND price <= ?");
         }
         //colors searched for and searching for using not equal but LIKE
-        if (color != null && !color.isBlank()) {
-            sql.append("AND color LIKE ? ");
+        if (color != null && !color.isEmpty()) {
+            sql.append(" AND color LIKE ? ");
         }
 
         // Try with resources to make sure connection is closed after use
@@ -77,19 +75,17 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
 
 
             ResultSet row = statement.executeQuery();
-
             while (row.next())
             {
                 Product product = mapRow(row);
                 products.add(product);
             }
-        }
-        catch (SQLException e)
+        } catch (SQLException e)
         {
             throw new RuntimeException(e);
         }
 
-        return products;
+         return products;
     }
 
     @Override
