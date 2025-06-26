@@ -23,44 +23,60 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
     {
         //Create an empty list to store the products found
         List<Product> products = new ArrayList<>();
-//maybe a bug as it has = instead of like
+//maybe a bug as it has = instead of like**
         //beginning the sql query "WHERE 1=1" IS A TRICK TO MAKE ADDING A filter easier
         StringBuilder sql = new StringBuilder("SELECT * FROM products where 1=1 ");
-
+//declare the parameters
 //filter by the given categoryId
              //   "WHERE (category_id = ? OR ? = -1) " +
                // "   AND (price <= ? OR ? = -1) " +
                 // "   AND (color = ? OR ? = '') ";
-if (categoryId != null ) {
-    sql.append("AND category_id = ? ");
-    params.add(categoryId); //adding categoryId to parameter List
+        if (categoryId != null ) {
+             sql.append("AND category_id = ? ");
     //        categoryId = categoryId == null ? -1 : categoryId;
 }
+
+        //declare parameters
+        List<Object> params = new ArrayList<>();
 //filter products that cost more than or equal to it
        // minPrice = minPrice == null ? new BigDecimal("-1") : minPrice;
         if (minPrice != null) {
             sql.append("AND price >= ?");
-            paras.add(minPrice);
         }
         //maxPrice is provided, so filter prouctsthat cost less than or equal to it
         // maxPrice = maxPrice == null ? new BigDecimal("-1") : maxPrice;
 
         if (maxPrice != null) {
             sql.append("AND price <= ?");
-            paras.add(maxPrice);
         }
-        //colors searched for and searching fo
-        color = color == null ? "" : color;
+        //colors searched for and searching for using not equal but LIKE
+        if (color != null && !color.isBlank()) {
+            sql.append("AND color LIKE ? ");
+        }
 
+        // Try with resources to make sure connection is closed after use
         try (Connection connection = getConnection())
-        {
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, categoryId);
-            statement.setInt(2, categoryId);
-            statement.setBigDecimal(3, minPrice);
-            statement.setBigDecimal(4, minPrice);
-            statement.setString(5, color);
-            statement.setString(6, color);
+        {            //prepare sql statement with final query
+            PreparedStatement statement = connection.prepareStatement(sql.toString());
+
+
+            //considering all that's given below, loop through each parameter to the statement
+            int paramIndex = 1;
+            if (categoryId != null) {
+                statement.setInt(paramIndex++, categoryId);
+            }
+
+            if ( minPrice != null) {
+                statement.setBigDecimal(paramIndex++, minPrice);
+            }
+
+            if (maxPrice != null) {
+                statement.setBigDecimal(paramIndex++, maxPrice);
+            }
+            if (color != null && !color.isEmpty()) {
+                statement.setString(paramIndex++, color);
+            }
+
 
             ResultSet row = statement.executeQuery();
 
