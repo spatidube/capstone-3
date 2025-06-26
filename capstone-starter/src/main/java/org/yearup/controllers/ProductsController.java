@@ -27,7 +27,8 @@ public class ProductsController
     @GetMapping("")
     @PreAuthorize("permitAll()")
     // where initially believe where a bug is, considering this is where the search/filter occurs
-    public List<Product> search(@RequestParam(name="cat", required = false) Integer categoryId,
+    //changed cat to id
+    public List<Product> search(@RequestParam(name="id", required = false) Integer categoryId,
                                 @RequestParam(name="minPrice", required = false) BigDecimal minPrice,
                                 @RequestParam(name="maxPrice", required = false) BigDecimal maxPrice,
                                 @RequestParam(name="color", required = false) String color
@@ -49,7 +50,9 @@ public class ProductsController
     {
         try
         {
-            var product = productDao.getById(id);
+            //changing var to Product
+
+            Product product = productDao.getById(id);
 
             if(product == null)
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND);
