@@ -109,14 +109,36 @@ The development workflow was managed using a GitHub Project board with the follo
 - **Dynamic Filtering**: Designing flexible filtering logic using query parameters proved more complex than expected.  
 - **Time Constraints**: Completing the project in three days demanded clear priorities and rapid development cycles.
 
+
 ---
 
-## Solutions Implemented
+## Solutions 
 
 - Fixed database configuration by carefully reviewing `application.properties`.  
 - Used Spring Boot's `@RequestParam` to support dynamic product filtering.  
 - Maintained a prioritized to-do list and leveraged tight feedback loops to maintain progress and adapt quickly.
+  
+### Bug Fixes
 
+**1. Search Filter Issue**  
+The search functionality was returning incorrect results due to a mismatch in the number of prepared statement parameters. We resolved this by aligning the parameters correctly and writing unit tests to help identify and confirm the fix.
+**2. Duplicate Laptop Listings**  
+The application was displaying three identical laptop entries due to a logic error in the product update method. Instead of updating the existing product, it was incorrectly invoking the `CREATE` ope
+
+## Implemented Methods
+
+### 🗂️ CategoriesController
+- `getProductsById(categoryId)` – Retrieves products based on a specific category ID  
+- `addCategory()` – Adds a new category (**Admin-only access**)  
+- `updateCategory()` – Updates an existing category (**Admin-only access**)  
+- `deleteCategory()` – Deletes a category (**Admin-only access**)  
+
+### 🗄️ MySqlCategories (DAO Layer)
+- `getAllCategories()` – Retrieves all available categories  
+- `getById(categoryId)` – Retrieves a single category by its ID  
+- `createCategory()` – Adds a new category (**Admin-only access**)  
+- `updateCategory(categoryId)` – Updates a category using its ID  
+- `deleteCategory(categoryId)` – Removes a category using its ID
 ---
 
 ## Lessons Learned
