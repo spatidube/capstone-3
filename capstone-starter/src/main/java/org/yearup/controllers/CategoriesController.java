@@ -2,6 +2,8 @@ package org.yearup.controllers;
 
 import java.sql.SQLException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.yearup.data.CategoryDao;
@@ -46,11 +48,15 @@ public class CategoriesController {
     // add the appropriate annotation for a get action
     @RequestMapping(path = "/{id}")
     @PreAuthorize("permitAll()")
-    public Category getById(@PathVariable int id) {
+    public ResponseEntity<Category> getById(@PathVariable int id) {
 
         // get the category by id
-        return categoryDao.getById(id);
+            Category category = categoryDao.getById(id);
+        if (category == null) {
 
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(category);
     }
         // the url to return all products in category 1 would look like this
         // https://localhost:8080/categories/1/products
@@ -68,6 +74,7 @@ public class CategoriesController {
         @PostMapping
         // add annotation to ensure that only an ADMIN can call this function
         @PreAuthorize("hasRole('ADMIN')")
+        @ResponseStatus(code = HttpStatus.CREATED)
         public Category addCategory(@RequestBody Category category)
         {
             // insert the category
@@ -90,10 +97,16 @@ public class CategoriesController {
         @DeleteMapping("{id}")
         // add annotation to ensure that only an ADMIN can call this function
         @PreAuthorize("hasRole('ADMIN')")
-        public void deleteCategory ( @PathVariable int id)
+        public ResponseEntity<Void> deleteCategory ( @PathVariable int id)
 
         {
             // delete the category by id
+            CategoryDao category = categoryDao.getById(id);
+            if (category == null) {
+
+                return ResponseEntity.notFound().build();
+            }
             categoryDao.delete(id);
+            return ResponseEntity.noContent().build();
         }
     }
