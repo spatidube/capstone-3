@@ -1,7 +1,6 @@
 package org.yearup.data.mysql;
 
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.yearup.data.CategoryDao;
 import org.yearup.models.Category;
 
@@ -23,10 +22,10 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
     }
 
     @Override
-    public List<Category> getAllCategories() throws SQLException {
-
-        List<Category> categories = new ArrayList();
-        String sql = "Select * FROM categories";
+    public List<Category> getAllCategories()
+    {
+        List<Category> categories = new ArrayList <>();
+        String sql = "SELECT * FROM categories";
 
         try (Connection connection = getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sql);

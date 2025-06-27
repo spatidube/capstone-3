@@ -1,6 +1,5 @@
 package org.yearup.controllers;
 
-import java.sql.SQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +10,7 @@ import org.yearup.data.ProductDao;
 import org.yearup.models.Category;
 import org.yearup.models.Product;
 
+import java.sql.SQLException;
 import java.util.List;
 
 // add the annotations to make this a REST controller
@@ -20,7 +20,8 @@ import java.util.List;
 // add annotation to allow cross site origin requests
 @CrossOrigin // allows cross-origin requests form the front end allowing front end access to access thebackend
 
-public class CategoriesController {
+public class CategoriesController
+{
     //these are tools that speak to the
     private CategoryDao categoryDao;
     private ProductDao productDao;
@@ -29,7 +30,8 @@ public class CategoriesController {
     // create an Autowired controller to inject the categoryDao and ProductDao
     @Autowired
 
-    public CategoriesController(CategoryDao categoryDao, ProductDao productDao) {
+    public CategoriesController(CategoryDao categoryDao, ProductDao productDao)
+    {
         this.categoryDao = categoryDao;
         this.productDao = productDao;
 
@@ -38,7 +40,7 @@ public class CategoriesController {
     // add the appropriate annotation for a get action
     //preauthorize annotation "permitAll" allows users to access this method
     @GetMapping()
-    @PreAuthorize(("permitAll()"))
+    @PreAuthorize("permitAll()")
 
     public List<Category> getAll() throws SQLException {
         // find and return all categories
@@ -48,7 +50,8 @@ public class CategoriesController {
     // add the appropriate annotation for a get action
     @RequestMapping(path = "/{id}")
     @PreAuthorize("permitAll()")
-    public ResponseEntity<Category> getById(@PathVariable int id) {
+    public ResponseEntity<Category> getById(@PathVariable int id)
+    {
 
         // get the category by id
         Category category = categoryDao.getById(id);
@@ -60,7 +63,8 @@ public class CategoriesController {
     }
         // the url to return all products in category 1 would look like this
         // https://localhost:8080/categories/1/products
-        @GetMapping("{categoryId}/products")
+        @GetMapping("" +
+                "{categoryId}/products")
         @PreAuthorize("permitAll()")
         public List<Product> getProductsById( @PathVariable int categoryId)
 
