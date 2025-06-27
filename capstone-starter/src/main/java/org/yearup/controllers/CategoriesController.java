@@ -51,7 +51,7 @@ public class CategoriesController {
     public ResponseEntity<Category> getById(@PathVariable int id) {
 
         // get the category by id
-            Category category = categoryDao.getById(id);
+        Category category = categoryDao.getById(id);
         if (category == null) {
 
             return ResponseEntity.notFound().build();
@@ -62,7 +62,6 @@ public class CategoriesController {
         // https://localhost:8080/categories/1/products
         @GetMapping("{categoryId}/products")
         @PreAuthorize("permitAll()")
-
         public List<Product> getProductsById( @PathVariable int categoryId)
 
         {
@@ -74,6 +73,7 @@ public class CategoriesController {
         @PostMapping
         // add annotation to ensure that only an ADMIN can call this function
         @PreAuthorize("hasRole('ADMIN')")
+        //ADDED
         @ResponseStatus(code = HttpStatus.CREATED)
         public Category addCategory(@RequestBody Category category)
         {
@@ -101,9 +101,8 @@ public class CategoriesController {
 
         {
             // delete the category by id
-            CategoryDao category = categoryDao.getById(id);
+            Category category = categoryDao.getById(id);
             if (category == null) {
-
                 return ResponseEntity.notFound().build();
             }
             categoryDao.delete(id);
