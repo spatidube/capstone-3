@@ -47,7 +47,7 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
         }
         //colors searched for and searching for using not equal but LIKE
         if (color != null && !color.isEmpty()) {
-            sql.append(" AND color LIKE ? ");
+            sql.append(" AND color = ? ");
         }
 
         // Try with resources to make sure connection is closed after use
@@ -81,8 +81,7 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
                 products.add(product);
             }
         } catch (SQLException e)
-        {
-            throw new RuntimeException(e);
+        {            throw new RuntimeException(e);
         }
 
          return products;
