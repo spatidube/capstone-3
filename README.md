@@ -1,4 +1,4 @@
-# EasyShop E-Commerce Application
+# WELCOME TO:
 ![image](https://github.com/user-attachments/assets/b521ff7b-0e59-4a5c-8538-9c9db70a7893)
 ## 1. Project Summary
 
