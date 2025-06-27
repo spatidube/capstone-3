@@ -1,5 +1,5 @@
 # EasyShop E-Commerce Application
-![image](https://github.com/user-attachments/assets/c59ea0aa-1abd-41f7-9bf7-7a7bda06b7b6)
+
 
 [
 ](https://sdmntprpolandcentral.oaiusercontent.com/files/00000000-9c0c-620a-a6b3-3ed0afe8f5c9/raw?se=2025-06-27T15%3A08%3A27Z&sp=r&sv=2024-08-04&sr=b&scid=11011262-f2ed-5707-99e4-41921157d583&skoid=f28c0102-4d9d-4950-baf0-4a8e5f6cf9d4&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-06-26T17%3A31%3A41Z&ske=2025-06-27T17%3A31%3A41Z&sks=b&skv=2024-08-04&sig=eW2ID1faNL/GEwj6VtjiSnWGecL7kNWxvpDHrr46chA%3D)![image](https://github.com/user-attachments/assets/88a43c59-298e-41ed-a6cc-4261c3f2cb4b)
@@ -19,7 +19,7 @@ Users can browse, search, and purchase products via API endpoints.
 ---
 
 ## 2. Running the Application
-
+![image](https://github.com/user-attachments/assets/c59ea0aa-1abd-41f7-9bf7-7a7bda06b7b6)
 ### Requirements
 
 - Java Development Kit (JDK 17 or higher)  
