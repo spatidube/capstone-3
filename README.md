@@ -60,7 +60,8 @@ cd capstone-3
 ## 3. Project Planning and Workflow
 
 ### GitHub Project Board
-![image](https://github.com/user-attachments/assets/32426f2d-b422-487d-bbe8-d7e6c4b09314)
+![image](https://github.com/user-attachments/assets/1b4c7d98-a617-41fc-86d1-89e7da5e701b)
+
 The development workflow was managed using a GitHub Project board with the following columns:
 
 - **Backlog** – Items yet to be started  
