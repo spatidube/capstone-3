@@ -107,7 +107,6 @@ The development workflow was managed using a GitHub Project board with the follo
 
 - **Database Connection Errors**: The application initially failed to connect to MySQL due to incorrect configuration in the properties file.  
 - **Dynamic Filtering**: Designing flexible filtering logic using query parameters proved more complex than expected.  
-- **Time Constraints**: Completing the project in three days demanded clear priorities and rapid development cycles.
 
 
 ---
