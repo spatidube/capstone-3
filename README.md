@@ -34,10 +34,6 @@ spring.datasource.username=<your-username>
 spring.datasource.password=<your-password>
 
 
-### Steps to Run
-
-1. Clone the repository:
-
 
 ### Steps to Run
 
@@ -72,12 +68,12 @@ The development workflow was managed using a GitHub Project board with the follo
 
 ### Roadmap
 
-**Day 1**  
+**Day 1-2**  
 - Configure the development environment  
 - Set up authentication  
 - Establish database connectivity  
 
-**Day 2**  
+**Day 3-5**  
 - Implement RESTful APIs for categories and products  
 
 **Day 3** 
@@ -86,4 +82,62 @@ The development workflow was managed using a GitHub Project board with the follo
 - Conduct integration testing to ensure system cohesion  
 
 ---
-## 4. Project Planning and Workflow
+## Development Phases
+
+- **Authentication**: Implemented `register` and `login` endpoints to secure user access to the API.  
+- **CRUD Operations**: Created RESTful endpoints for managing categories, products, shopping carts, user profiles, and orders.  
+- **Product Filtering**: Enabled dynamic filtering of products via query parameters.  
+- **Testing**: Validated functionality of all endpoints using Postman.
+
+---
+
+## Tools Used
+
+- **Spring Boot** – Backend application framework  
+- **MySQL** – Relational database management  
+- **Postman** – API testing and validation  
+- **GitHub Projects** – Project and task management
+
+---
+
+## Challenges Faced
+
+- **Database Connection Errors**: The application initially failed to connect to MySQL due to incorrect configuration in the properties file.  
+- **Dynamic Filtering**: Designing flexible filtering logic using query parameters proved more complex than expected.  
+- **Time Constraints**: Completing the project in three days demanded clear priorities and rapid development cycles.
+
+---
+
+## Solutions Implemented
+
+- Fixed database configuration by carefully reviewing `application.properties`.  
+- Used Spring Boot's `@RequestParam` to support dynamic product filtering.  
+- Maintained a prioritized to-do list and leveraged tight feedback loops to maintain progress and adapt quickly.
+
+---
+
+## Lessons Learned
+
+### 🔐 Cross-Origin and Security Annotations
+- `@CrossOrigin`: Enables Cross-Origin Resource Sharing (CORS) so that frontend apps can make requests to the backend from different domains.  
+  - *Example*: `AuthenticationController.java` in `org.yearup.controllers`  
+- `@PreAuthorize`: Restricts access to certain endpoints to authenticated users.  
+  - *Example*: `OrdersController.java` uses `@PreAuthorize("isAuthenticated()")`
+
+### 🧰 Leveraging Spring Boot Annotations
+- Key annotations like `@Autowired`, `@RequestMapping`, and `@RequestParam` streamlined development and enhanced code organization.  
+  - *Example*: `ProductsController.java` in `org.yearup.controllers`
+
+### 🔬 API Testing with Postman
+- Used Postman to simulate and verify API requests, organize test collections, and ensure endpoint reliability.  
+  - *Reference*: See “How to Run” section above
+
+### 💻 Frontend Development
+- Built a lightweight user interface using **HTML** and **JavaScript** for an intuitive customer experience.  
+  - *Example*: `index.html` and related JS files in the `easyshop-frontend` directory
+
+### ⚙️ Efficient Data Handling with Java Streams
+- Utilized Java Streams to filter, map, and process data concisely and effectively.  
+  - *Example*: `ShoppingCartController.java` in `org.yearup.controllers` uses `stream().filter().map().collect()`
+
+---
